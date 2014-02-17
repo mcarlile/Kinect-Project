@@ -5,7 +5,8 @@ public class Chair : MonoBehaviour
 {
 		public int chairPosition;
 		public GameObject manager;
-		public bool chairsActive = true;
+		public bool chairsActive = false;
+		public GameObject instructionsSitSuccess;
 
 		// Use this for initialization
 		void Start ()
@@ -21,15 +22,44 @@ public class Chair : MonoBehaviour
 
 		void OnTriggerEnter ()
 		{
-				if (chairsActive == true) {
-						manager.GetComponent<Manager> ().SatInChair (chairPosition);
-
+				if (chairsActive == false) {
+						manager.GetComponent<Manager> ().ShowSitSuccess ();
+						manager.GetComponent<Manager> ().AllowTertiaryTimer (chairPosition);
 				}
 
+				if (chairsActive == true) {
+						//manager.GetComponent<Manager> ().SatInChair (chairPosition);
+				}
+
+		}
+
+		void OnTriggerExit ()
+		{
+				if (chairsActive == false) {
+						manager.GetComponent<Manager> ().ShowSitFailure ();
+						manager.GetComponent<Manager> ().DisableTertiaryTimer ();
+
+				}
+		
+				if (chairsActive == true) {
+						//manager.GetComponent<Manager> ().SatInChair (chairPosition);
+			
+				}
+		
 		}
 
 		public void Deactivate ()
 		{
 				chairsActive = false;
+		}
+
+		public void Activate ()
+		{
+				chairsActive = true;
+		}
+
+		public void AllowSitting ()
+		{
+//			gameObject.GetComponent<BoxCollider>().isTrigger (true)
 		}
 }
