@@ -28,7 +28,6 @@ public class Chair : MonoBehaviour
 				}
 
 				if (chairsActive == true) {
-						//manager.GetComponent<Manager> ().SatInChair (chairPosition);
 				}
 
 		}
@@ -55,6 +54,7 @@ public class Chair : MonoBehaviour
 
 		public void Activate ()
 		{
+				Debug.Log ("chairs are active");
 				chairsActive = true;
 		}
 
